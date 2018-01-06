@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'antd-mobile/dist/antd-mobile.css';
+import actives from "./components/actives/main"
 
 class App extends Component {
+
+  onFileUploadChange(fileImageBase64) {
+      this.setState({
+        fileImageBase64 : fileImageBase64
+      })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <actives.defaults
+          {...this.state}
+          onFileUploadChange={this.onFileUploadChange.bind(this)}
+       />
     );
   }
 }
