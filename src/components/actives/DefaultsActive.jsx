@@ -8,7 +8,7 @@ import UploadComp from "../UploadComp"
 import ShowComp from "../ShowComp"
 
 const imageCustomerOption = {
-  backgroundRotate : 180,
+  backgroundRotate : 0,
   treats : [{
     action : "text",
     text : "我是圆梦使者",

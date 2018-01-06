@@ -19,7 +19,7 @@ const loadImage = (imageUrl) => {
 
 const rotateImage = (url, rotate) => {
   return new Promise((resolve) => {
-    if (rotate%180 == 0) {
+    if (rotate % 360 == 0) {
       resolve(url)
       return;
     }
@@ -29,8 +29,11 @@ const rotateImage = (url, rotate) => {
     let ctx1 = canvas.getContext("2d");
     let image1 = new Image();
     image1.onload = function () {
-      canvas.width = (rotate % 180 == 0) ? image1.width : image1.height;
-      canvas.height = (rotate % 180 == 0) ? image1.height : image1.width;
+      let niceWidth = document.body.clientWidth;
+      let niceHeight = document.body.clientWidth * image1.height / image1.width ;
+      canvas.width = (rotate % 180 == 0) ? niceWidth : niceHeight;
+      canvas.height = (rotate % 180 == 0) ? niceHeight : niceWidth;
+      //
         var xpos = canvas.width / 2;
         var ypos = canvas.height / 2;
         ctx1.save();
@@ -42,7 +45,7 @@ const rotateImage = (url, rotate) => {
         } else {
           ctx1.translate(-ypos, -xpos);
         }
-        ctx1.drawImage(image1, 0, 0);
+        ctx1.drawImage(image1, 0, 0, niceWidth, niceHeight);
         ctx1.restore();
         //
         resolve(canvas.toDataURL("image/png"))
@@ -96,7 +99,6 @@ const merge = (backgroudImage, imageCustomerOption) => {
   ).then((newBackgroundImage) => {
     return loadImage(newBackgroundImage)
   }).then((img) => {
-    console.log(img.width, img.height)
     // 设置画布高度为页面基础宽度
     canvas.width = document.body.clientWidth;
     canvas.height = document.body.clientWidth * img.height / img.width ;
