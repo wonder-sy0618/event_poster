@@ -79,7 +79,7 @@ const imageCustomerOption = {
 
 class DefaultsActive extends Component {
   render() {
-    imageCustomerOption.treats[1].text = (this.props.inputName ? this.props.inputName : "")
+    imageCustomerOption.treats[2].text = (this.props.inputName ? this.props.inputName : "")
     return (
       <div className="active_defaults" >
         <div className="title" >
