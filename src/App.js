@@ -5,17 +5,18 @@ import actives from "./components/actives/main"
 
 class App extends Component {
 
-  onFileUploadChange(fileImageBase64) {
-      this.setState({
-        fileImageBase64 : fileImageBase64
-      })
+  onContentUploadChange(fileImageBase64, inputName) {
+    let obj = {};
+    if (fileImageBase64) obj.fileImageBase64 = fileImageBase64;
+    if (inputName) obj.inputName = inputName;
+      this.setState(obj)
   }
 
   render() {
     return (
       <actives.defaults
           {...this.state}
-          onFileUploadChange={this.onFileUploadChange.bind(this)}
+          onContentUploadChange={this.onContentUploadChange.bind(this)}
        />
     );
   }
