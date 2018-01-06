@@ -18,9 +18,11 @@ class ShowComp extends Component {
       comp.props.fileImageBase64,
       comp.props.imageCustomerOption
     ).then((imgBase64) => {
-      this.setState({
-        showImage : imgBase64
-      })
+      if (comp.state.showImage !== imgBase64) {
+        comp.setState({
+          showImage : imgBase64
+        })
+      }
     })
   }
 

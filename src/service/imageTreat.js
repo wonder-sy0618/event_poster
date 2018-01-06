@@ -57,24 +57,24 @@ const merge = (backgroudImage, imageCustomerOption) => {
   let ctx = canvas.getContext("2d");
   //
   return loadImage(backgroudImage).then((img) => {
-    // 设置画布高度为背景图高度
-    canvas.width = img.width;
-    canvas.height = img.height;
+    // 设置画布高度为页面基础宽度
+    canvas.width = document.body.clientWidth;
+    canvas.height = document.body.clientWidth * img.height / img.width ;
     //
-    ctx.drawImage(img,0,0,img.width,img.height);
+    ctx.drawImage(img,0,0,canvas.width,canvas.height);
     // 处理图片
     for (let i=0; i<imageCustomerOption.treats.length; i++) {
       let opt = imageCustomerOption.treats[i];
       if (opt.action === 'watermark') {
         loadImage(opt.url).then((watermarkImg) => {
-          let drawWidth = img.width * opt.sizePercent / 100;
-          let drawHeight = img.height * (watermarkImg.width / drawWidth);
+          let drawWidth = canvas.width * opt.sizePercent / 100;
+          let drawHeight = drawWidth * watermarkImg.height / watermarkImg.width;
           let local = drawLocal(opt, canvas.width, canvas.height, drawWidth, drawHeight);
           ctx.drawImage(watermarkImg, local.left, local.top, drawWidth, drawHeight);
         })
       } else if (opt.action === 'text') {
-        ctx.font = "oblique small-caps bold 50px arial";
-        ctx.fillStyle = "blue";
+        ctx.font = opt.font;
+        ctx.fillStyle = opt.fillStyle;
         let local = drawLocal(opt, canvas.width, canvas.height, 100, 100);
         ctx.fillText(opt.text, local.left, local.top);
       }
