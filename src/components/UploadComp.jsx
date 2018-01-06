@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { Flex, WhiteSpace, InputItem, ImagePicker, WingBlank, Toast } from 'antd-mobile';
+import { Flex, WhiteSpace, InputItem, ImagePicker, WingBlank, Toast, Button } from 'antd-mobile';
+import { SketchPicker, TwitterPicker } from 'react-color'
 
 
 class UploadComp extends Component {
@@ -22,6 +23,10 @@ class UploadComp extends Component {
 
   onInput(text) {
     this.props.onContentUploadChange(undefined, text)
+  }
+
+  onChangeTextColor() {
+
   }
 
   render() {
@@ -54,7 +59,14 @@ class UploadComp extends Component {
               <span>定制处理：</span>
             </Flex.Item>
             <Flex.Item>
-              <button onClick={this.props.onBackgroundImageRotate.bind(this)} >背景旋转</button>
+              <Button onClick={this.props.onBackgroundImageRotate.bind(this)}
+                style={{marginBottom : 10}} >背景旋转</Button>
+              <TwitterPicker
+                color={ this.props.imageCustomerOption.textColor } width="100"
+                colors={['#0693E3', '#FCB900', '#ABB8C3', '#00D084']}
+                triangle="hide"
+                onChangeComplete={this.props.onChangeTextColor.bind(this)}
+              />
             </Flex.Item>
           </Flex>
         </WingBlank>

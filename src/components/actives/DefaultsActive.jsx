@@ -9,6 +9,7 @@ import ShowComp from "../ShowComp"
 
 const imageCustomerOption = {
   backgroundRotate : 0,
+  textColor : "white",
   treats : [{
     action : "text",
     text : "我是圆梦使者",
@@ -20,7 +21,7 @@ const imageCustomerOption = {
   }, {
     action : "text",
     text : "",
-    font : "oblique small-caps bold 40px arial",
+    font : "normal small-caps bold 40px arial",
     fillStyle : "red",
     local : "left-top",
     posFixedLeft : 140,
@@ -65,14 +66,6 @@ const imageCustomerOption = {
     local : "left-bottom",
     posFixedLeft : 100,
     posFixedBottom : 80
-  }, {
-    action : "text",
-    text : "项目 → ",
-    font : "normal small-caps normal 16px arial",
-    fillStyle : "white",
-    local : "left-bottom",
-    posFixedLeft : 235,
-    posFixedBottom : 80
   }]
 }
 
@@ -90,7 +83,7 @@ qrcode.toDataURL("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc0
 
 class DefaultsActive extends Component {
   render() {
-    imageCustomerOption.treats[1].text = this.props.inputName
+    imageCustomerOption.treats[1].text = (this.props.inputName ? this.props.inputName : "")
     return (
       <div className="active_defaults" >
         <div className="title" >
@@ -101,11 +94,21 @@ class DefaultsActive extends Component {
         </div>
         <WhiteSpace size="lg" />
         <UploadComp {...this.props}
-          onBackgroundImageRotate={(() => {
-              imageCustomerOption.backgroundRotate += 90;
-              console.log(imageCustomerOption.backgroundRotate)
-              this.setState({})
-          }).bind(this) } />
+            imageCustomerOption={imageCustomerOption}
+            onBackgroundImageRotate={(() => {
+                imageCustomerOption.backgroundRotate += 90;
+                this.setState({})
+            }).bind(this) }
+            onChangeTextColor={((color) => {
+                for (var i=0; i<imageCustomerOption.treats.length; i++) {
+                  if (imageCustomerOption.treats[i].fillStyle == imageCustomerOption.textColor) {
+                    imageCustomerOption.treats[i].fillStyle = color.hex;
+                  }
+                }
+                imageCustomerOption.textColor = color.hex;
+                this.setState({})
+            }).bind(this) }
+          ></UploadComp>
         <ShowComp {...this.props}
           imageCustomerOption={imageCustomerOption}
           ></ShowComp>
