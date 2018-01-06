@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, WhiteSpace } from 'antd-mobile';
-import qrcode from "qrcode";
+import qrcode from "../../image/qrcode.png"
 
 import "./DefaultsActive.css"
 
@@ -69,15 +69,13 @@ const imageCustomerOption = {
   }]
 }
 
-qrcode.toDataURL("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc0db45f411664b2e&redirect_uri=https%3A%2F%2Fssl.gongyi.qq.com%2Fm%2Fweixin%2Fdetail.htm%3Fshowwxpaytitle%3D1%26et%3Dfx%26pid%3D38080&response_type=code&scope=snsapi_base#wechat_redirect", (err, url) => {
-  imageCustomerOption.treats.push({
-    action : "watermark",
-    url : url,
-    sizePercent : 30,
-    local : "right-bottom",
-    posFixedLeft : -10,
-    posFixedBottom : -10
-  })
+imageCustomerOption.treats.push({
+  action : "watermark",
+  url : qrcode,
+  sizePercent : 30,
+  local : "right-bottom",
+  posFixedLeft : -10,
+  posFixedBottom : -10
 })
 
 
