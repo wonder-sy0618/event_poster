@@ -18,7 +18,7 @@ const imageCustomerOption = {
     posFixedBottom : 50
   }, {
     action : "text",
-    text : "石宇涵",
+    text : "",
     font : "oblique small-caps bold 40px arial",
     fillStyle : "red",
     local : "left-top",
@@ -86,16 +86,19 @@ qrcode.toDataURL("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc0
   })
 })
 
-export default (props) => (
-  <div className="active_defaults" >
-    <div className="title" >
-      <h1>留守儿童圆梦古城</h1>
-      <div style={{padding: "0px 10px"}}>众人拾柴火焰高，我们一起做圆梦使者，让这个冬天不再寒冷，我们帮28名乡村少年和8名乡村教师圆梦。</div>
+export default (props) => {
+  imageCustomerOption.treats[1].text = props.inputName
+  return (
+    <div className="active_defaults" >
+      <div className="title" >
+        <h1>留守儿童圆梦古城</h1>
+        <div style={{padding: "0px 10px"}}>众人拾柴火焰高，我们一起做圆梦使者，让这个冬天不再寒冷，我们帮28名乡村少年和8名乡村教师圆梦。</div>
+      </div>
+      <WhiteSpace size="lg" />
+      <UploadComp {...props} />
+      <ShowComp {...props}
+        imageCustomerOption={imageCustomerOption}
+        ></ShowComp>
     </div>
-    <WhiteSpace size="lg" />
-    <UploadComp {...props} />
-    <ShowComp {...props}
-      imageCustomerOption={imageCustomerOption}
-      ></ShowComp>
-  </div>
-)
+  );
+}
