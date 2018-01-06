@@ -30,15 +30,31 @@ class UploadComp extends Component {
         <WingBlank>
           <Flex>
             <Flex.Item>
+              <span>请输入姓名：</span>
+            </Flex.Item>
+            <Flex.Item>
               <InputItem
                   type="text"
                   onChange={this.onInput.bind(this)}
                 ></InputItem>
             </Flex.Item>
+          </Flex>
+          <Flex>
+            <Flex.Item>
+              <span>请选择照片：</span>
+            </Flex.Item>
             <Flex.Item>
               <ImagePicker
               onChange={this.onChange.bind(this)}
                ></ImagePicker>
+            </Flex.Item>
+          </Flex>
+          <Flex>
+            <Flex.Item>
+              <span>定制处理：</span>
+            </Flex.Item>
+            <Flex.Item>
+              <button onClick={this.props.onBackgroundImageRotate.bind(this)} >背景旋转</button>
             </Flex.Item>
           </Flex>
         </WingBlank>

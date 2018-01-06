@@ -8,6 +8,7 @@ import UploadComp from "../UploadComp"
 import ShowComp from "../ShowComp"
 
 const imageCustomerOption = {
+  backgroundRotate : 180,
   treats : [{
     action : "text",
     text : "我是圆梦使者",
@@ -86,19 +87,28 @@ qrcode.toDataURL("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc0
   })
 })
 
-export default (props) => {
-  imageCustomerOption.treats[1].text = props.inputName
-  return (
-    <div className="active_defaults" >
-      <div className="title" >
-        <h1>留守儿童圆梦古城</h1>
-        <div style={{padding: "0px 10px"}}>众人拾柴火焰高，我们一起做圆梦使者，让这个冬天不再寒冷，我们帮28名乡村少年和8名乡村教师圆梦。</div>
+
+class DefaultsActive extends Component {
+  render() {
+    imageCustomerOption.treats[1].text = this.props.inputName
+    return (
+      <div className="active_defaults" >
+        <div className="title" >
+          <h1>留守儿童圆梦古城</h1>
+          <div style={{padding: "0px 10px"}}>众人拾柴火焰高，我们一起做圆梦使者，让这个冬天不再寒冷，我们帮28名乡村少年和8名乡村教师圆梦。</div>
+        </div>
+        <WhiteSpace size="lg" />
+        <UploadComp {...this.props}
+          onBackgroundImageRotate={(() => {
+              imageCustomerOption.backgroundRotate += 90;
+              console.log(imageCustomerOption.backgroundRotate)
+              this.setState({})
+          }).bind(this) } />
+        <ShowComp {...this.props}
+          imageCustomerOption={imageCustomerOption}
+          ></ShowComp>
       </div>
-      <WhiteSpace size="lg" />
-      <UploadComp {...props} />
-      <ShowComp {...props}
-        imageCustomerOption={imageCustomerOption}
-        ></ShowComp>
-    </div>
-  );
+    );
+  }
 }
+export default DefaultsActive

@@ -17,6 +17,35 @@ const loadImage = (imageUrl) => {
   });
 }
 
+const rotateImage = (url, rotate) => {
+  return new Promise((resolve) => {
+    let area = getArea();
+    let canvas = $('<canvas />').appendTo(area)[0];
+    let ctx1 = canvas.getContext("2d");
+    let image1 = new Image();
+    image1.onload = function () {
+      canvas.width = (rotate % 180 == 0) ? image1.width : image1.height;
+      canvas.height = (rotate % 180 == 0) ? image1.height : image1.width;
+        var xpos = canvas.width / 2;
+        var ypos = canvas.height / 2;
+        ctx1.save();
+        //旋转图
+       ctx1.translate(xpos, ypos);
+        ctx1.rotate((rotate % 360) * Math.PI / 180);
+        if (rotate % 180 == 0) {
+          ctx1.translate(-xpos, -ypos);
+        } else {
+          ctx1.translate(-ypos, -xpos);
+        }
+        ctx1.drawImage(image1, 0, 0);
+        ctx1.restore();
+        //
+        resolve(canvas.toDataURL("image/png"))
+    }
+    image1.src = url;
+  })
+}
+
 const drawLocal = (opt, canvasWidth, canvasHeight, drawWidth, drawHeight) => {
   let drawLeft = 0;
   let drawTop = 0;
@@ -56,7 +85,13 @@ const merge = (backgroudImage, imageCustomerOption) => {
   let canvas = $('<canvas />').appendTo(area)[0];
   let ctx = canvas.getContext("2d");
   //
-  return loadImage(backgroudImage).then((img) => {
+  return rotateImage(
+    backgroudImage,
+    imageCustomerOption.backgroundRotate
+  ).then((newBackgroundImage) => {
+    return loadImage(newBackgroundImage)
+  }).then((img) => {
+    console.log(img.width, img.height)
     // 设置画布高度为页面基础宽度
     canvas.width = document.body.clientWidth;
     canvas.height = document.body.clientWidth * img.height / img.width ;
