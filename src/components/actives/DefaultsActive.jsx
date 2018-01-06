@@ -96,6 +96,8 @@ class DefaultsActive extends Component {
         <div className="title" >
           <h1>留守儿童圆梦古城</h1>
           <div style={{padding: "0px 10px"}}>众人拾柴火焰高，我们一起做圆梦使者，让这个冬天不再寒冷，我们帮28名乡村少年和8名乡村教师圆梦。</div>
+          <div style={{padding: "10px 10px"}}>本应用所有操作全部在当前手机上进行，不会上传/收集您的任何信息，请放心使用。</div>
+          <div style={{padding: "10px 10px", color : 'red'}}>图片制作完成后，请长按图片保存到手机。</div>
         </div>
         <WhiteSpace size="lg" />
         <UploadComp {...this.props}

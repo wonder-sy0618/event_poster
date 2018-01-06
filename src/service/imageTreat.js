@@ -19,6 +19,11 @@ const loadImage = (imageUrl) => {
 
 const rotateImage = (url, rotate) => {
   return new Promise((resolve) => {
+    if (rotate%180 == 0) {
+      resolve(canvas.toDataURL("image/png"))
+      return;
+    }
+    //
     let area = getArea();
     let canvas = $('<canvas />').appendTo(area)[0];
     let ctx1 = canvas.getContext("2d");
