@@ -54,7 +54,7 @@ const imageCustomerOption = {
     font : "normal small-caps normal 16px arial",
     fillStyle : "white",
     local : "left-bottom",
-    posFixedLeft : 60,
+    posFixedLeft : 10,
     posFixedBottom : 80
   }, {
     action : "text",
@@ -62,7 +62,7 @@ const imageCustomerOption = {
     font : "normal small-caps normal 16px arial",
     fillStyle : "red",
     local : "left-bottom",
-    posFixedLeft : 150,
+    posFixedLeft : 100,
     posFixedBottom : 80
   }, {
     action : "text",
@@ -70,7 +70,7 @@ const imageCustomerOption = {
     font : "normal small-caps normal 16px arial",
     fillStyle : "white",
     local : "left-bottom",
-    posFixedLeft : 285,
+    posFixedLeft : 235,
     posFixedBottom : 80
   }]
 }
