@@ -105,15 +105,17 @@ const merge = (backgroudImage, imageCustomerOption) => {
     //
     ctx.drawImage(img,0,0,canvas.width,canvas.height);
     // 处理图片
+    let promiseArray = [];
     for (let i=0; i<imageCustomerOption.treats.length; i++) {
       let opt = imageCustomerOption.treats[i];
       if (opt.action === 'watermark') {
-        loadImage(opt.url).then((watermarkImg) => {
+        let promise = loadImage(opt.url).then((watermarkImg) => {
           let drawWidth = canvas.width * opt.sizePercent / 100;
           let drawHeight = drawWidth * watermarkImg.height / watermarkImg.width;
           let local = drawLocal(opt, canvas.width, canvas.height, drawWidth, drawHeight);
           ctx.drawImage(watermarkImg, local.left, local.top, drawWidth, drawHeight);
-        })
+        });
+        promiseArray.push(promise)
       } else if (opt.action === 'text') {
         ctx.font = opt.font;
         ctx.fillStyle = opt.fillStyle;
@@ -121,11 +123,10 @@ const merge = (backgroudImage, imageCustomerOption) => {
         ctx.fillText(opt.text, local.left, local.top);
       }
     }
-    return new Promise((resolve, reject) => {
-      window.setTimeout(() => {
-        // 输出图片
-        resolve(canvas.toDataURL("image/png"))
-      }, 500)
+    return Promise.all(
+      promiseArray
+    ).then(() => {
+        return canvas.toDataURL("image/png")
     })
   })
 }

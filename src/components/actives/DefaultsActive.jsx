@@ -11,6 +11,13 @@ const imageCustomerOption = {
   backgroundRotate : 0,
   textColor : "white",
   treats : [{
+    action : "watermark",
+    url : qrcode,
+    sizePercent : 30,
+    local : "right-bottom",
+    posFixedLeft : -10,
+    posFixedBottom : -10
+  }, {
     action : "text",
     text : "我是圆梦使者",
     font : "normal small-caps normal 20px 雅黑",
@@ -68,15 +75,6 @@ const imageCustomerOption = {
     posFixedBottom : 80
   }]
 }
-
-imageCustomerOption.treats.push({
-  action : "watermark",
-  url : qrcode,
-  sizePercent : 30,
-  local : "right-bottom",
-  posFixedLeft : -10,
-  posFixedBottom : -10
-})
 
 
 class DefaultsActive extends Component {
